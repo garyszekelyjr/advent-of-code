@@ -1,11 +1,11 @@
 package main
 
+
 import (
 	"os"
 	"strconv"
 	"strings"
 )
-
 
 
 func abs(x int) int {
@@ -14,7 +14,6 @@ func abs(x int) int {
 	}
 	return x
 }
-
 
 
 func is_safe(levels []int) bool {
