@@ -6,7 +6,6 @@ import (
 	"strings"
 )
 
-
 func index(list []string, target string) int {
 	for i, v := range list {
 		if v == target {
@@ -16,14 +15,12 @@ func index(list []string, target string) int {
 	return -1
 }
 
-
 func swap(numbers []string, before int, after int) []string {
 	temp := numbers[before]
 	numbers[before] = numbers[after]
 	numbers[after] = temp
 	return numbers
 }
-
 
 func valid(numbers []string, rules []string) (bool, int, int) {
 	for _, rule := range rules {
@@ -48,9 +45,8 @@ func valid(numbers []string, rules []string) (bool, int, int) {
 
 }
 
-
 func main() {
-	input, _ := os.ReadFile("input.txt")	
+	input, _ := os.ReadFile("input.txt")
 	rules, _ := os.ReadFile("rules.txt")
 
 	part_1 := 0
@@ -62,22 +58,21 @@ func main() {
 		}
 		numbers := strings.Split(line, ",")
 		correct, before, after := valid(numbers, strings.Split(string(rules), "\n"))
-		if correct{ 
-			middle, _ := strconv.Atoi(numbers[(len(numbers) - 1) / 2])
+		if correct {
+			middle, _ := strconv.Atoi(numbers[(len(numbers)-1)/2])
 			part_1 += middle
 		} else {
 			for {
 				numbers = swap(numbers, before, after)
 				correct, before, after = valid(numbers, strings.Split(string(rules), "\n"))
 				if correct {
-					middle, _ := strconv.Atoi(numbers[(len(numbers) - 1) / 2])
+					middle, _ := strconv.Atoi(numbers[(len(numbers)-1)/2])
 					part_2 += middle
 					break
 				}
 			}
 		}
 	}
-
 
 	println("Part 1:", part_1)
 	println("Part 2:", part_2)
