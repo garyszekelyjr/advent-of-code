@@ -6,9 +6,8 @@ import (
 	"strings"
 )
 
-func memoized_blink(stones []string, blinks int) int {
+func blink(stones []string, blinks int) int {
 	counts := make(map[string]int)
-	count := 0
 
 	for _, stone := range stones {
 		counts[stone] = 1
@@ -37,6 +36,8 @@ func memoized_blink(stones []string, blinks int) int {
 		counts = temp
 	}
 
+	count := 0
+
 	for _, value := range counts {
 		count += value
 	}
@@ -44,38 +45,12 @@ func memoized_blink(stones []string, blinks int) int {
 	return count
 }
 
-func blink(stones []string) []string {
-	temp := make([]string, 0)
-	for _, stone := range stones {
-		if stone == "0" {
-			temp = append(temp, "1")
-		} else if len(stone)%2 == 0 {
-			number_1, _ := strconv.Atoi(stone[len(stone)/2:])
-			number_2, _ := strconv.Atoi(stone[:len(stone)/2])
-
-			stone_1 := strconv.Itoa(number_1)
-			stone_2 := strconv.Itoa(number_2)
-
-			temp = append(temp, stone_2, stone_1)
-		} else {
-			number, _ := strconv.Atoi(stone)
-			temp = append(temp, strconv.Itoa(number*2024))
-		}
-	}
-	return temp
-}
-
 func main() {
 	input, _ := os.ReadFile(os.Args[1])
-	blinks_1, _ := strconv.Atoi(os.Args[2])
-	blinks_2, _ := strconv.Atoi(os.Args[3])
 
 	stones := strings.Split(strings.TrimSpace(string(input)), " ")
-	for i := 0; i < blinks_1; i++ {
-		stones = blink(stones)
-	}
-	println("Part 1:", len(stones))
+	println("Part 1:", blink(stones, 25))
 
 	stones = strings.Split(strings.TrimSpace(string(input)), " ")
-	println("Part 2:", memoized_blink(stones, blinks_2))
+	println("Part 2:", blink(stones, 75))
 }
