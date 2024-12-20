@@ -5,18 +5,26 @@ import (
 	"strings"
 )
 
+func construct(garden [][]string, plots [][]int) {
+
+}
+
 func main() {
 	input, _ := os.ReadFile(os.Args[1])
 
 	garden := make([][]string, 0)
-
-	for i, line := range strings.Split(string(input), "\n") {
-		if line != "" {
-			garden = append(garden, make([]string, 0))
-			for _, character := range strings.Split(line, "") {
-				garden[i] = append(garden[i], character)
-			}
+	for _, line := range strings.Split(string(input), "\n") {
+		if line == "" {
+			break
 		}
+
+		garden = append(garden, strings.Split(line, ""))
 	}
 
+	for _, row := range garden {
+		for _, cell := range row {
+			print(cell)
+		}
+		println()
+	}
 }
